@@ -1,6 +1,6 @@
-Hi all! To get started, please do the following steps:
+Hi all! To get started, please do the following:
 
-1. Clone the "project_workflow_tutorial"
+1. Clone the "project_workflow_tutorial" repository
 2. Open RStudio and go to File > New Project. Choose the option to check out a project from version control, and paste in the repository URL
 2. Pull the latest version of the repository from Github (good practice for later)
 3. Open the "project_workflow_tutorial.Rmd" script
