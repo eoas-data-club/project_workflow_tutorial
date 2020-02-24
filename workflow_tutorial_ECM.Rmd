@@ -4,7 +4,7 @@ output:
   pdf_document: default
   html_document: default
 ---
-#trying
+#trying again
 ##### Hi all! To get started, please do the following steps:
 
 1. Clone the "project_workflow_tutorial" repository (hit the green "Clone or Download" button and then copy the URL)
@@ -51,36 +51,44 @@ options(scipen=999)   # turn off scientific notation
 **Use the function hist() to visualize this**
 
 ```{r histogram, echo = TRUE}
-
-
+hist(catchrates$catchrate)
+hist(catchrates$air_temp_c)
+hist(catchrates$water_temp_c)
+hist(catchrates$do_mg.l)
+hist(catchrates$percent_sat)
 
 ```
 
 #### Follow-up questions:
 
 1. Why is checking the distribution of the response variable important?
+shows which models might be an appropriate fit
 2. What does it tell us about how to structure the statistical model we want to fit to these data?
+need to do a poisson regression (glm)
 
 ### Step 3: Can we see a relationship between turbidity and catch rate visually, without using any stats?
-
+catch rate decreased as turbidity increased
 **Use the function plot()**
 
 ```{r turbidity vs catch}
-
-
+plot(catchrates$turbidity_fnu, catchrates$catchrate)
+plot(catchrates$water_temp_c, catchrates$catchrate)
+plot(catchrates$percent_sat, catchrates$catchrate)
+plot(catchrates$total_dissolved_solids_mg.l, catchrates$catchrate)
 
 ```
 
 
-### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and turbidity.
+### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and catch rates.
 
 **Use par(mfrow = c(#rows, #cols) to make a multipanel plot in base R. Use plot() for continuous variables and boxplot() for categorical variables.**
 
 Note: All the variables in columns 3-13 are fair game! But working with dates and times in R can be complex, so to keep us moving through the material, let's set them aside for later unless you're really comfortable with the 'lubridate"'package.
 
 ```{r multipanel plots of covariates}
-
-
+par(mfrow=c(1,2))
+plot(catchrates$water_temp_c, catchrates$catchrate)
+plot(catchrates$percent_sat, catchrates$catchrate) 
 
 ```
 
