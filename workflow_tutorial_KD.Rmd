@@ -5,8 +5,6 @@ output:
   html_document: default
 ---
 
-#hi hello
-
 ##### Hi all! To get started, please do the following steps:
 
 1. Clone the "project_workflow_tutorial" repository (hit the green "Clone or Download" button and then copy the URL)
@@ -54,8 +52,7 @@ options(scipen=999)   # turn off scientific notation
 
 ```{r histogram, echo = TRUE}
 
-data <- read.csv("catchrates.csv") 
-catchrate_hist <- hist(data$catchrate) #add hist and trying again
+
 
 ```
 
