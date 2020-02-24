@@ -1,10 +1,10 @@
 ---
 title: "Project Workflow Tutorial"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
-
+#trying
 ##### Hi all! To get started, please do the following steps:
 
 1. Clone the "project_workflow_tutorial" repository (hit the green "Clone or Download" button and then copy the URL)
