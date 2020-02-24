@@ -30,8 +30,7 @@ Note: because you've downloaded the .Rproj file to your local repository, which 
 
 rm(list = ls())       # clear your workspace
 
-library(tidyverse)
-install.packages("ggbiplot")# for manipulating and plotting data
+library(tidyverse)    # for manipulating and plotting data
 library(ggbiplot)     # for plotting a PCA
 library(lme4)         # to fit a generalized linear mixed model
 library(lubridate)    # to work with date and time objects
@@ -52,11 +51,8 @@ options(scipen=999)   # turn off scientific notation
 **Use the function hist() to visualize this**
 
 ```{r histogram, echo = TRUE}
-catch<-read.csv("catchrates.csv")
-head(catch)
-hist(catch$catchrate)
-mean(catch$catchrate)
-var(catch$catchrate)
+
+
 
 ```
 
@@ -71,8 +67,7 @@ var(catch$catchrate)
 
 ```{r turbidity vs catch}
 
-ggplot(catch, aes(x=turbidity_fnu, y=catchrate))+
-  geom_point()
+
 
 ```
 
@@ -84,25 +79,7 @@ ggplot(catch, aes(x=turbidity_fnu, y=catchrate))+
 Note: All the variables in columns 3-13 are fair game! But working with dates and times in R can be complex, so to keep us moving through the material, let's set them aside for later unless you're really comfortable with the 'lubridate"'package.
 
 ```{r multipanel plots of covariates}
-ggplot(catch, aes(x=weather, y=turbidity_fnu))+
-  geom_boxplot()
 
-ggplot(catch, aes(x=total_dissolved_solids_mg.l, y=turbidity_fnu))+
-  geom_point()
-
-ggplot(catch, aes(x=total_dissolved_solids_mg.l, y=turbidity_fnu))+
-  geom_point()
-
-ggplot(catch, aes(x=total_dissolved_solids_mg.l, y=turbidity_fnu))+
-  geom_point()
-
-ggplot(catch, aes(x=turbidity_fnu, y= catchrate))+
-  geom_point()+
-  facet_wrap(~weather)
-
-ggplot(catch, aes(x=total_dissolved_solids_mg.l, y= catchrate))+
-  geom_point()+
-  facet_wrap(~weather)
 
 
 ```
