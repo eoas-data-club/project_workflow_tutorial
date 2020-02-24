@@ -72,7 +72,7 @@ options(scipen=999)   # turn off scientific notation
 ```
 
 
-### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and turbidity.
+### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and catch rates.
 
 **Use par(mfrow = c(#rows, #cols) to make a multipanel plot in base R. Use plot() for continuous variables and boxplot() for categorical variables.**
 
@@ -93,7 +93,7 @@ Note: All the variables in columns 3-13 are fair game! But working with dates an
 
 If you include variables that are too closely correlated with each other, the model fitting formula you use is going to have trouble. 
 
-**Use  the cor() function and ggheatmap() to make a correlation coefficient matrix to see which of your explanatory variables are strongly related to each other and to your variable of interest, turbidity.**
+**Use  the cor() function and ggplot()+geom_tile() to make a correlation coefficient matrix to see which of your explanatory variables are strongly related to each other and to your variable of interest, turbidity.**
 
 Note: this is a good opportunity to practice finding ready-made code on the internet. Making correlation matrices is something that scientists have to do a lot, so why reinvent the wheel?
 
