@@ -30,7 +30,8 @@ Note: because you've downloaded the .Rproj file to your local repository, which 
 
 rm(list = ls())       # clear your workspace
 
-library(tidyverse)    # for manipulating and plotting data
+library(tidyverse)
+install.packages("ggbiplot")# for manipulating and plotting data
 library(ggbiplot)     # for plotting a PCA
 library(lme4)         # to fit a generalized linear mixed model
 library(lubridate)    # to work with date and time objects
@@ -51,8 +52,11 @@ options(scipen=999)   # turn off scientific notation
 **Use the function hist() to visualize this**
 
 ```{r histogram, echo = TRUE}
-
-
+catch<-read.csv("catchrates.csv")
+head(catch)
+hist(catch$catchrate)
+mean(catch$catchrate)
+var(catch$catchrate)
 
 ```
 
@@ -67,7 +71,8 @@ options(scipen=999)   # turn off scientific notation
 
 ```{r turbidity vs catch}
 
-
+ggplot(catchrate, aes(x=turbidity_fnu, y=catchrate))+
+  geom_point()
 
 ```
 
