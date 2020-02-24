@@ -53,6 +53,9 @@ options(scipen=999)   # turn off scientific notation
 
 ```{r histogram, echo = TRUE}
 
+hist(catchrates$catchrate)
+
+
 
 
 ```
