@@ -104,7 +104,11 @@ ggplot(catch, aes(x=total_dissolved_solids_mg.l, y= catchrate))+
   geom_point()+
   facet_wrap(~weather)
 
+ggplot(catch, aes(x=turbidity_fnu, y= catchrate, color=weather))+
+  geom_point()
 
+ggplot(catch, aes(x=barometric_pressure_mmHg, y= catchrate))+
+  geom_point()
 ```
 
 #### Follow-up question:
@@ -121,7 +125,18 @@ If you include variables that are too closely correlated with each other, the mo
 Note: this is a good opportunity to practice finding ready-made code on the internet. Making correlation matrices is something that scientists have to do a lot, so why reinvent the wheel?
 
 ```{r correlation matrix}
+cormat <- round(cor(catch[,-c(1:6)]), 2)
+cormat
+?cor()
 
+library(reshape2)
+melted_cormat <- melt(cormat)
+head(melted_cormat)
+melted_cormat
+
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value))+
+ geom_tile()+
+ scale_fill_gradient2()
 
 
 ```
