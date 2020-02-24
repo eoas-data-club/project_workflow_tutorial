@@ -106,8 +106,13 @@ Note: this is a good opportunity to practice finding ready-made code on the inte
 
 ```{r correlation matrix}
 
-
-
+cormat <- cor(data[,7:ncol(data)])
+library(reshape2)
+melted_cormat <- melt(cormat)
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
+ geom_tile()
+library(GGally)
+ggcorr(data[,7:ncol(data)], label = T)
 ```
 
 #### Follow up questions:
