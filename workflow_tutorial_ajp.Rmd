@@ -1,11 +1,9 @@
 ---
 title: "Project Workflow Tutorial"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
-
-#hi hello
 
 ##### Hi all! To get started, please do the following steps:
 
@@ -54,8 +52,7 @@ options(scipen=999)   # turn off scientific notation
 
 ```{r histogram, echo = TRUE}
 
-data <- read.csv("catchrates.csv") 
-catchrate_hist <- hist(data$catchrate) #add hist and trying again
+
 
 ```
 
@@ -69,7 +66,7 @@ catchrate_hist <- hist(data$catchrate) #add hist and trying again
 **Use the function plot()**
 
 ```{r turbidity vs catch}
-plot(catchrate~turbidity_fnu, data = data) #check turbidity
+
 
 
 ```
@@ -79,15 +76,11 @@ plot(catchrate~turbidity_fnu, data = data) #check turbidity
 
 **Use par(mfrow = c(#rows, #cols) to make a multipanel plot in base R. Use plot() for continuous variables and boxplot() for categorical variables.**
 
-
 Note: All the variables in columns 3-13 are fair game! But working with dates and times in R can be complex, so to keep us moving through the material, let's set them aside for later unless you're really comfortable with the 'lubridate"'package.
 
 ```{r multipanel plots of covariates}
-par(mfrow = c(2, 2))
-boxplot(catchrate~weather, data = data)
-plot(data$catchrate~data$water_temp_c)
-plot(data$catchrate~data$total_dissolved_solids_mg.l)
-plot(data$catchrate~data$conductivity_muS.cm)
+
+
 
 ```
 
