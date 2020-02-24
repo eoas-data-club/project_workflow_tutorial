@@ -79,7 +79,9 @@ plot(catchrates$turbidity_fnu~catchrates$catchrate)
 Note: All the variables in columns 3-13 are fair game! But working with dates and times in R can be complex, so to keep us moving through the material, let's set them aside for later unless you're really comfortable with the 'lubridate"'package.
 
 ```{r multipanel plots of covariates}
-par(mfrow=c())
+par(mfrow=c(1,2))
+plot(catchrates$water_temp_c,catchrates$catchrate)
+plot(catchrates$barometric_pressure_mmHg,catchrates$catchrate)
 
 
 ```
@@ -98,8 +100,9 @@ If you include variables that are too closely correlated with each other, the mo
 Note: this is a good opportunity to practice finding ready-made code on the internet. Making correlation matrices is something that scientists have to do a lot, so why reinvent the wheel?
 
 ```{r correlation matrix}
-
-
+cor(catchrates[,7:16])
+g<-ggplot(catchrates[,7:16], aes(x=catchrate)) +
+  geom_tile()
 
 ```
 
