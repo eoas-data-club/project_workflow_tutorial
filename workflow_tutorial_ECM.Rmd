@@ -1,8 +1,8 @@
 ---
 title: "Project Workflow Tutorial"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 #trying again
 ##### Hi all! To get started, please do the following steps:
@@ -41,7 +41,7 @@ library(effects)      # to plot partial effects
 
 options(scipen=999)   # turn off scientific notation
 
-
+catchrates <- read.csv("catchrates.csv")
 
 ```
 
