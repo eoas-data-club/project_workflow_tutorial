@@ -1,8 +1,8 @@
 ---
 title: "Project Workflow Tutorial"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 #trying again
 ##### Hi all! To get started, please do the following steps:
@@ -41,7 +41,7 @@ library(effects)      # to plot partial effects
 
 options(scipen=999)   # turn off scientific notation
 
-
+catchrates <- read.csv("catchrates.csv")
 
 ```
 
@@ -95,7 +95,8 @@ plot(catchrates$percent_sat, catchrates$catchrate)
 #### Follow-up question:
 
 1. Based on this exploratory plotting, what covariates do you want to include in your model?
-
+all of them! turbidity, temperature
+need to do correlations to see what's important
 
 #### Step 5: Assessing collinearity between explanatory variables
 
