@@ -62,16 +62,19 @@ hist(catchrates$percent_sat)
 #### Follow-up questions:
 
 1. Why is checking the distribution of the response variable important?
-
+shows which models might be an appropriate fit
 2. What does it tell us about how to structure the statistical model we want to fit to these data?
+need to do a poisson regression (glm)
 
 ### Step 3: Can we see a relationship between turbidity and catch rate visually, without using any stats?
-
+catch rate decreased as turbidity increased
 **Use the function plot()**
 
 ```{r turbidity vs catch}
-
-
+plot(catchrates$turbidity_fnu, catchrates$catchrate)
+plot(catchrates$water_temp_c, catchrates$catchrate)
+plot(catchrates$percent_sat, catchrates$catchrate)
+plot(catchrates$total_dissolved_solids_mg.l, catchrates$catchrate)
 
 ```
 
