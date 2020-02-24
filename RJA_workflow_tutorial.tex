@@ -1,0 +1,353 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Project Workflow Tutorial},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Project Workflow Tutorial}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\#hi hello
+
+\hypertarget{hi-all-to-get-started-please-do-the-following-steps}{%
+\subparagraph{Hi all! To get started, please do the following
+steps:}\label{hi-all-to-get-started-please-do-the-following-steps}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Clone the ``project\_workflow\_tutorial'' repository (hit the green
+  ``Clone or Download'' button and then copy the URL)
+\item
+  Open RStudio and go to File \textgreater{} New Project. Choose the
+  option to check out a project from version control, and paste in the
+  repository URL
+\item
+  Pull the latest version of the repository from Github (good practice
+  for later)
+\item
+  Open the ``project\_workflow\_tutorial.Rmd'' script
+\item
+  Save the RMarkdown script as a new file, adding your initials or a
+  team name. This will allow us to work on the same script in the same
+  repository without creating commit conflicts, so it's important to do
+  first, before making other changes!
+\item
+  Check that you have all the packages we're going to be using installed
+  in your version of RStudio.
+\item
+  Push your changes to Github
+\end{enumerate}
+
+\hypertarget{background}{%
+\subsubsection{Background}\label{background}}
+
+In this tutorial, we'll be using a simplified version of the data I
+collected this summer in Mongolia. The project was designed to study the
+effect of turbidity and other environmental variables on fishes'
+vulnerability to fishing gear. Mongolia's rivers are becoming more
+turbid because of thunderstorms caused by climate change, and we want to
+understand how this might affect fish behavior and fishing success.
+
+We hypothesize that high turbidity reduces catch rates. But there's lots
+of evidence that other environmental variables affect catch rate,
+including weather (like degree of cloud cover), barometric pressure,
+water temperature, and time of day. Unless we control for these
+variables, we can't be sure that we're measuring the effect of turbidity
+without bias. There are additional complexities having to do with the
+format of the data that will also affect the structure of our
+statistical model. We'll get to these shortly.
+
+\hypertarget{step-1-setup}{%
+\subsubsection{Step 1: Setup}\label{step-1-setup}}
+
+Load the following libraries and use read.csv() to read the
+``catchrates.csv'' file into R.\\
+Note: because you've downloaded the .Rproj file to your local
+repository, which means everything in this folder belongs to the same R
+project, you shouldn't have to give read.csv a file path for the catch
+rates data. RStudio will just look for a file named ``catchrates.csv''
+within the project folder.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(}\DataTypeTok{list =} \KeywordTok{ls}\NormalTok{())       }\CommentTok{# clear your workspace}
+
+\KeywordTok{library}\NormalTok{(tidyverse)    }\CommentTok{# for manipulating and plotting data}
+\KeywordTok{library}\NormalTok{(ggbiplot)     }\CommentTok{# for plotting a PCA}
+\KeywordTok{library}\NormalTok{(lme4)         }\CommentTok{# to fit a generalized linear mixed model}
+\KeywordTok{library}\NormalTok{(lubridate)    }\CommentTok{# to work with date and time objects}
+\KeywordTok{library}\NormalTok{(reshape2)     }\CommentTok{# to reshape data}
+\KeywordTok{library}\NormalTok{(MuMIn)        }\CommentTok{# for model validation}
+\KeywordTok{library}\NormalTok{(DHARMa)       }\CommentTok{# for model validation}
+\KeywordTok{library}\NormalTok{(effects)      }\CommentTok{# to plot partial effects}
+
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{scipen=}\DecValTok{999}\NormalTok{)   }\CommentTok{# turn off scientific notation}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{step-2-what-is-the-distribution-of-the-response-variable-catch-rate}{%
+\subsubsection{Step 2: What is the distribution of the response variable
+catch
+rate?}\label{step-2-what-is-the-distribution-of-the-response-variable-catch-rate}}
+
+\textbf{Use the function hist() to visualize this}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"catchrates.csv"}\NormalTok{) }
+\NormalTok{catchrate_hist <-}\StringTok{ }\KeywordTok{hist}\NormalTok{(data}\OperatorTok{$}\NormalTok{catchrate) }\CommentTok{#add hist and trying again}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{RJA_workflow_tutorial_files/figure-latex/histogram-1.pdf}
+
+\hypertarget{follow-up-questions}{%
+\paragraph{Follow-up questions:}\label{follow-up-questions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Why is checking the distribution of the response variable important?
+\item
+  What does it tell us about how to structure the statistical model we
+  want to fit to these data?
+\end{enumerate}
+
+\hypertarget{step-3-can-we-see-a-relationship-between-turbidity-and-catch-rate-visually-without-using-any-stats}{%
+\subsubsection{Step 3: Can we see a relationship between turbidity and
+catch rate visually, without using any
+stats?}\label{step-3-can-we-see-a-relationship-between-turbidity-and-catch-rate-visually-without-using-any-stats}}
+
+\textbf{Use the function plot()}
+
+\hypertarget{step-4-plot-the-relationship-between-other-potential-explanatory-variables-weather-barometric-pressure-water-temperature-air-temperature-time-of-day-etc.-and-turbidity.}{%
+\subsubsection{Step 4: Plot the relationship between other potential
+explanatory variables (weather, barometric pressure, water temperature,
+air temperature, time of day, etc.) and
+turbidity.}\label{step-4-plot-the-relationship-between-other-potential-explanatory-variables-weather-barometric-pressure-water-temperature-air-temperature-time-of-day-etc.-and-turbidity.}}
+
+\textbf{Use par(mfrow = c(\#rows, \#cols) to make a multipanel plot in
+base R. Use plot() for continuous variables and boxplot() for
+categorical variables.}
+
+Note: All the variables in columns 3-13 are fair game! But working with
+dates and times in R can be complex, so to keep us moving through the
+material, let's set them aside for later unless you're really
+comfortable with the 'lubridate"'package.
+
+\hypertarget{follow-up-question}{%
+\paragraph{Follow-up question:}\label{follow-up-question}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Based on this exploratory plotting, what covariates do you want to
+  include in your model?
+\end{enumerate}
+
+\hypertarget{step-5-assessing-collinearity-between-explanatory-variables}{%
+\paragraph{Step 5: Assessing collinearity between explanatory
+variables}\label{step-5-assessing-collinearity-between-explanatory-variables}}
+
+If you include variables that are too closely correlated with each
+other, the model fitting formula you use is going to have trouble.
+
+\textbf{Use the cor() function and ggheatmap() to make a correlation
+coefficient matrix to see which of your explanatory variables are
+strongly related to each other and to your variable of interest,
+turbidity.}
+
+Note: this is a good opportunity to practice finding ready-made code on
+the internet. Making correlation matrices is something that scientists
+have to do a lot, so why reinvent the wheel?
+
+\hypertarget{follow-up-questions-1}{%
+\paragraph{Follow up questions:}\label{follow-up-questions-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Why are highly correlated variables a problem, statistically speaking?
+\item
+  How do you interpret a correlation coefficient? What's the threshold
+  for significance?
+\item
+  Let's interpret our correlation coefficient plots
+\end{enumerate}
+
+\hypertarget{step-6-principal-components-analysis-of-explanatory-variables}{%
+\subsubsection{Step 6: Principal Components Analysis of explanatory
+variables}\label{step-6-principal-components-analysis-of-explanatory-variables}}
+
+We've got a number of variables that we need to control for, but we're
+not primarily interested in them. Several of them are correlated with
+each other, so we probably want to find a way to figure out which ones
+give us essentially the same information and collapse them into a single
+``environmental profile'' of each observation. One common way to do this
+is Principal Components Analysis (PCA).
+
+\textbf{Standardize your variables using scale(), then use the function
+prcomp() to run a PCA on the covariates that you think are likely to be
+a) interesting and b) related to each other. Plot your PCA output using
+ggbiplot(). If you think one principal component stands out as
+summarizing your environmental variables well, extract its values for
+our data and add them to our dataframe to use as an explanatory
+variable.}
+
+Notes: 1. PCA only works for continuous variables 2. ggbiplot() allows
+you to group the points on your graph based on categorical values. Use
+the ``groups'' argument in ggbiplot to see whether the spread of your
+environmental variables seems to be linked to the locations where the
+data were gathered (coded in the nested variables ``camp'' and ``site'')
+
+\hypertarget{follow-up-questions-2}{%
+\paragraph{Follow-up questions}\label{follow-up-questions-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Why is it helpful to standardize our explanatory variables?
+\item
+  Let's summarize what we know about the data so far.
+\end{enumerate}
+
+\hypertarget{step-7-fit-a-generalized-linear-mixed-model-to-the-data}{%
+\subsubsection{Step 7: Fit a generalized linear mixed model to the
+data}\label{step-7-fit-a-generalized-linear-mixed-model-to-the-data}}
+
+\textbf{Fit a generalized linear mixed effects model to these data with
+a Poisson distribution and a log link and site as a random effect using
+the glmer() function.}
+
+\hypertarget{step-8-evaluate-your-models-fit-using-summary-r.squaredglmm-in-the-mumln-package-and-the-dharma-package.-plot-partial-effects-with-the-effects-package.}{%
+\subsubsection{\texorpdfstring{Step 8: \textbf{Evaluate your model's fit
+using summary(), r.squaredGLMM() in the `MuMln' package, and the
+`DHARMa' package. Plot partial effects with the `effects'
+package.}}{Step 8: Evaluate your model's fit using summary(), r.squaredGLMM() in the `MuMln' package, and the `DHARMa' package. Plot partial effects with the `effects' package.}}\label{step-8-evaluate-your-models-fit-using-summary-r.squaredglmm-in-the-mumln-package-and-the-dharma-package.-plot-partial-effects-with-the-effects-package.}}
+
+
+\end{document}
