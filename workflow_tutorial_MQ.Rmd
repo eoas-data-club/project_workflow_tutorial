@@ -1,0 +1,155 @@
+---
+title: "Project Workflow Tutorial"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+##### Hi all! To get started, please do the following steps:
+
+1. Clone the "project_workflow_tutorial" repository (hit the green "Clone or Download" button and then copy the URL)
+2. Open RStudio and go to File > New Project. Choose the option to check out a project from version control, and paste in the repository URL
+2. Pull the latest version of the repository from Github (good practice for later)
+3. Open the "project_workflow_tutorial.Rmd" script
+4. Save the RMarkdown script as a new file, adding your initials or a team name. This will allow us to work on the same script in the same repository without creating commit conflicts, so it's important to do first, before making other changes!
+5. Check that you have all the packages we're going to be using installed in your version of RStudio.
+6. Push your changes to Github
+
+
+### Background
+
+In this tutorial, we'll be using a simplified version of the data I collected this summer in Mongolia. The project was designed to study the effect of turbidity and other environmental variables on fishes' vulnerability to fishing gear. Mongolia's rivers are becoming more turbid because of thunderstorms caused by climate change, and we want to understand how this might affect fish behavior and fishing success.
+
+We hypothesize that high turbidity reduces catch rates. But there's lots of evidence that other environmental variables affect catch rate, including weather (like degree of cloud cover), barometric pressure, water temperature, and time of day. Unless we control for these variables, we can’t be sure that we’re measuring the effect of turbidity without bias. There are additional complexities having to do with the format of the data that will also affect the structure of our statistical model. We'll get to these shortly.
+
+### Step 1: Setup
+
+Load the following libraries and use read.csv() to read the "catchrates.csv" file into R.  
+Note: because you've downloaded the .Rproj file to your local repository, which means everything in this folder belongs to the same R project, you shouldn't have to give read.csv a file path for the catch rates data. RStudio will just look for a file named "catchrates.csv" within the project folder.
+```{r setup, message = FALSE, warning = FALSE, include = TRUE, error = FALSE}
+
+rm(list = ls())       # clear your workspace
+
+library(tidyverse)    # for manipulating and plotting data
+library(ggbiplot)     # for plotting a PCA
+library(lme4)         # to fit a generalized linear mixed model
+library(lubridate)    # to work with date and time objects
+library(reshape2)     # to reshape data
+library(MuMIn)        # for model validation
+library(DHARMa)       # for model validation
+library(effects)      # to plot partial effects
+
+options(scipen=999)   # turn off scientific notation
+
+
+
+```
+
+
+### Step 2: What is the distribution of the response variable catch rate?
+
+**Use the function hist() to visualize this**
+
+```{r histogram, echo = TRUE}
+hist(catchrates$catchrate)
+
+
+```
+
+#### Follow-up questions:
+
+1. Why is checking the distribution of the response variable important?
+2. What does it tell us about how to structure the statistical model we want to fit to these data?
+
+### Step 3: Can we see a relationship between turbidity and catch rate visually, without using any stats?
+
+**Use the function plot()**
+
+```{r turbidity vs catch}
+plot(catchrates$turbidity_fnu~catchrates$catchrate)
+
+
+```
+
+
+### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and catchrate.
+
+**Use par(mfrow = c(#rows, #cols) to make a multipanel plot in base R. Use plot() for continuous variables and boxplot() for categorical variables.**
+
+Note: All the variables in columns 3-13 are fair game! But working with dates and times in R can be complex, so to keep us moving through the material, let's set them aside for later unless you're really comfortable with the 'lubridate"'package.
+
+```{r multipanel plots of covariates}
+par(mfrow=c(1,2))
+plot(catchrates$water_temp_c,catchrates$catchrate)
+plot(catchrates$barometric_pressure_mmHg,catchrates$catchrate)
+
+
+```
+
+#### Follow-up question:
+
+1. Based on this exploratory plotting, what covariates do you want to include in your model?
+
+
+#### Step 5: Assessing collinearity between explanatory variables
+
+If you include variables that are too closely correlated with each other, the model fitting formula you use is going to have trouble. 
+
+**Use  the cor() function and ggheatmap() to make a correlation coefficient matrix to see which of your explanatory variables are strongly related to each other and to your variable of interest, turbidity.**
+
+Note: this is a good opportunity to practice finding ready-made code on the internet. Making correlation matrices is something that scientists have to do a lot, so why reinvent the wheel?
+
+```{r correlation matrix}
+cor(catchrates[,7:16])
+g<-ggplot(catchrates[,7:16], aes(x=catchrate)) +
+  geom_tile()
+
+```
+
+#### Follow up questions:
+
+1. Why are highly correlated variables a problem, statistically speaking?
+2. How do you interpret a correlation coefficient? What’s the threshold for significance?
+3. Let's interpret our correlation coefficient plots
+
+### Step 6: Principal Components Analysis of explanatory variables
+
+We’ve got a number of variables that we need to control for, but we're not primarily interested in them. Several of them are correlated with each other, so we probably want to find a way to figure out which ones give us essentially the same information and collapse them into a single “environmental profile” of each observation. One common way to do this is Principal Components Analysis (PCA).
+
+**Standardize your variables using scale(), then use the function prcomp() to run a PCA on the covariates that you think are likely to be a) interesting and b) related to each other. Plot your PCA output using ggbiplot(). If you think one principal component stands out as summarizing your environmental variables well, extract its values for our data and add them to our dataframe to use as an explanatory variable.**
+
+Notes:
+1. PCA only works for continuous variables
+2. ggbiplot() allows you to group the points on your graph based on categorical values. Use the “groups” argument in ggbiplot to see whether the spread of your environmental variables seems to be linked to the locations where the data were gathered (coded in the nested variables “camp” and “site”)
+
+```{r}
+
+
+
+```
+
+#### Follow-up questions
+1. Why is it helpful to standardize our explanatory variables?
+2. Let's summarize what we know about the data so far.
+
+
+### Step 7: Fit a generalized linear mixed model to the data
+
+**Fit a generalized linear mixed effects model to these data with a Poisson distribution and a log link and site as a random effect using the glmer() function.**
+
+```{r}
+
+
+
+```
+
+### Step 8: **Evaluate your model's fit using summary(), r.squaredGLMM() in the 'MuMln' package, and the 'DHARMa' package. Plot partial effects with the 'effects' package.**
+
+```{r}
+
+
+
+
+
+```
+
