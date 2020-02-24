@@ -54,7 +54,8 @@ options(scipen=999)   # turn off scientific notation
 
 ```{r histogram, echo = TRUE}
 
-
+data <- read.csv("catchrates.csv")
+catchrate_hist <- hist(data$catchrate)
 
 ```
 
