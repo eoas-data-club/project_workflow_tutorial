@@ -1,11 +1,9 @@
 ---
 title: "Project Workflow Tutorial"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
-
-#hi hello
 
 ##### Hi all! To get started, please do the following steps:
 
@@ -53,9 +51,8 @@ options(scipen=999)   # turn off scientific notation
 **Use the function hist() to visualize this**
 
 ```{r histogram, echo = TRUE}
+hist(catchrates$catchrate)
 
-data <- read.csv("catchrates.csv") 
-catchrate_hist <- hist(data$catchrate) #add hist and trying again
 
 ```
 
@@ -69,25 +66,23 @@ catchrate_hist <- hist(data$catchrate) #add hist and trying again
 **Use the function plot()**
 
 ```{r turbidity vs catch}
-plot(catchrate~turbidity_fnu, data = data) #check turbidity
+plot(catchrates$turbidity_fnu~catchrates$catchrate)
 
 
 ```
 
 
-### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and turbidity.
+### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and catchrate.
 
 **Use par(mfrow = c(#rows, #cols) to make a multipanel plot in base R. Use plot() for continuous variables and boxplot() for categorical variables.**
-
 
 Note: All the variables in columns 3-13 are fair game! But working with dates and times in R can be complex, so to keep us moving through the material, let's set them aside for later unless you're really comfortable with the 'lubridate"'package.
 
 ```{r multipanel plots of covariates}
-par(mfrow = c(2, 2))
-boxplot(catchrate~weather, data = data)
-plot(data$catchrate~data$water_temp_c)
-plot(data$catchrate~data$total_dissolved_solids_mg.l)
-plot(data$catchrate~data$conductivity_muS.cm)
+par(mfrow=c(1,2))
+plot(catchrates$water_temp_c,catchrates$catchrate)
+plot(catchrates$barometric_pressure_mmHg,catchrates$catchrate)
+
 
 ```
 
@@ -105,14 +100,10 @@ If you include variables that are too closely correlated with each other, the mo
 Note: this is a good opportunity to practice finding ready-made code on the internet. Making correlation matrices is something that scientists have to do a lot, so why reinvent the wheel?
 
 ```{r correlation matrix}
+cor(catchrates[,7:16])
+g<-ggplot(catchrates[,7:16], aes(x=catchrate)) +
+  geom_tile()
 
-cormat <- cor(data[,7:ncol(data)])
-library(reshape2)
-melted_cormat <- melt(cormat)
-ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value)) + 
- geom_tile()
-library(GGally)
-ggcorr(data[,7:ncol(data)], label = T)
 ```
 
 #### Follow up questions:
