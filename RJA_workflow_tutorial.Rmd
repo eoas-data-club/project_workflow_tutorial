@@ -69,7 +69,7 @@ catchrate_hist <- hist(data$catchrate) #add hist and trying again
 **Use the function plot()**
 
 ```{r turbidity vs catch}
-
+plot(catchrate~turbidity_fnu, data = data)
 
 
 ```
