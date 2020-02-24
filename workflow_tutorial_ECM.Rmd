@@ -79,15 +79,16 @@ plot(catchrates$total_dissolved_solids_mg.l, catchrates$catchrate)
 ```
 
 
-### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and turbidity.
+### Step 4: Plot the relationship between other potential explanatory variables (weather, barometric pressure, water temperature, air temperature, time of day, etc.) and catch rates.
 
 **Use par(mfrow = c(#rows, #cols) to make a multipanel plot in base R. Use plot() for continuous variables and boxplot() for categorical variables.**
 
 Note: All the variables in columns 3-13 are fair game! But working with dates and times in R can be complex, so to keep us moving through the material, let's set them aside for later unless you're really comfortable with the 'lubridate"'package.
 
 ```{r multipanel plots of covariates}
-
-
+par(mfrow=c(1,2))
+plot(catchrates$water_temp_c, catchrates$catchrate)
+plot(catchrates$percent_sat, catchrates$catchrate)
 
 ```
 
