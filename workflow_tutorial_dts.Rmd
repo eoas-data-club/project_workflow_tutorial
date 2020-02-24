@@ -31,18 +31,17 @@ Note: because you've downloaded the .Rproj file to your local repository, which 
 rm(list = ls())       # clear your workspace
 
 library(tidyverse)    # for manipulating and plotting data
-library(ggbiplot)     # for plotting a PCA
+# library(ggbiplot)     # for plotting a PCA
 library(lme4)         # to fit a generalized linear mixed model
 library(lubridate)    # to work with date and time objects
 library(reshape2)     # to reshape data
 library(MuMIn)        # for model validation
 library(DHARMa)       # for model validation
 library(effects)      # to plot partial effects
+library(fitdistrplus)
 
 options(scipen=999)   # turn off scientific notation
-
-
-
+catch <- read_csv('catchrates.csv')
 ```
 
 
@@ -51,8 +50,8 @@ options(scipen=999)   # turn off scientific notation
 **Use the function hist() to visualize this**
 
 ```{r histogram, echo = TRUE}
-
-
+hist(catch$catchrate)
+plot(fitdist(catch$catchrate, 'nbinom'))
 
 ```
 
@@ -66,8 +65,7 @@ options(scipen=999)   # turn off scientific notation
 **Use the function plot()**
 
 ```{r turbidity vs catch}
-
-
+plot(catch$catchrate ~ catch$turbidity_fnu)
 
 ```
 
@@ -79,7 +77,11 @@ options(scipen=999)   # turn off scientific notation
 Note: All the variables in columns 3-13 are fair game! But working with dates and times in R can be complex, so to keep us moving through the material, let's set them aside for later unless you're really comfortable with the 'lubridate"'package.
 
 ```{r multipanel plots of covariates}
-
+par(mfrow = c(2,2))
+plot(catch$catchrate ~ catch$turbidity_fnu)
+plot(catch$catchrate ~ catch$water_temp_c)
+plot(catch$catchrate ~ catch$total_dissolved_solids_mg.l)
+plot(catch$catchrate ~ catch$conductivity_muS.cm)
 
 
 ```
